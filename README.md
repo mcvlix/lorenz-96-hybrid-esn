@@ -6,5 +6,5 @@ This is an attempted approach on state estimation using our knowledge on Hybrid 
 
 (papers cited and stuff)
 
-Max Arcinas, Anderson Compalas, Mohamed Badri, Marcus Chen, Josiah Aviles
+### Max Arcinas, Anderson Compalas, Mohamed Badri, Marcus Chen, Josiah Aviles
 
