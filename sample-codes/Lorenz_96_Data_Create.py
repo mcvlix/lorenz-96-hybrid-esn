@@ -2,6 +2,8 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
+import os
+from tqdm import tqdm
 
 K = 8
 J = 8
@@ -16,7 +18,7 @@ tvec = dt * np.array(range(0, int(max_t / dt)))
 np.random.seed(65)
 
 
-X_vec = np.random.randint(-5, 5, (8,))
+X_vec = np.random.randint(-5, 5, (K,)).astype(float) # ensure float dtype for RK4 updates
 Y_mat = np.random.randn(J, K)
 
 # Z_mat=.05*np.random.randn(J,K,I)
@@ -60,9 +62,8 @@ def step(x_vec, y_mat, z_mat):
     dz = e * d * z_minus * (z_plus - z_minus2) - e * z_mat + (h * e / d) * y_mat
     return dx, dy, dz
 
-
-for i in range(int(max_t/dt)):
-
+print("Starting Simulation")
+for i in tqdm(range(int(max_t / dt)), desc="Simulating RK4"):
     [dx1, dy1, dz1] = step(X_vec,Y_mat,Z_mat)
 
     Rx2=X_vec+.5*dt*dx1
@@ -101,10 +102,15 @@ print(np.mean(x_store))
 print('x_std: ')
 print(np.std(x_store))
 
-data=np.vstack((x_store.transpose(),y_store.transpose()))
+# data=np.vstack((x_store.transpose(),y_store.transpose()))
 y_norm=(y_store-np.mean(y_store))/np.std(y_store)
 x_norm=(x_store-np.mean(x_store))/np.std(x_store)
-data_norm=np.vstack((x_norm.transpose(),y_norm.transpose()))
-print(data_norm.shape)
+# data_norm=np.vstack((x_norm.transpose(),y_norm.transpose()))
+data_norm = np.hstack((x_norm, y_norm))
+print("Final shape (timesteps, features):", data_norm.shape)
 
-np.save('truth_h_'+str(h)+'_c_'+str(c)+'_F_'+str(F)+'.npy',data_norm)
+output_dir = os.path.join("..", "data")
+os.makedirs(output_dir, exist_ok=True)
+filename = 'truth_h_'+str(h)+'_c_'+str(c)+'_F_'+str(F)+'.npy'
+
+np.save(os.path.join(output_dir, filename), data_norm)
