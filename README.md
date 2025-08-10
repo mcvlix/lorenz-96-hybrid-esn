@@ -4,7 +4,7 @@
 
 This is a research project completed for capstone modeling course AM170B, supervised by professor Ashesh Chattopadhyay.
 
-### Sample output for ESN model
+### Sample output from the Echo State Network
 
 ![Sample output for ESN model](ESN-output.png)
 
