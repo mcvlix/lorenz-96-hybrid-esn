@@ -1,10 +1,10 @@
 # Lorenz-96-hybrid-esn
 
-### State Estimation of the Multi-Scale Lorenz 96 System Using a Hybrid Echo State Network and Ensemble Kalman Filter
+# State Estimation of the Multi-Scale Lorenz 96 System Using a Hybrid Echo State Network and Ensemble Kalman Filter
 
 This is a research project completed for capstone modeling course AM170B, supervised by professor Ashesh Chattopadhyay.
 
-## Sample output for ESN model
+### Sample output for ESN model
 
 ![Sample output for ESN model](ESN-output.png)
 
